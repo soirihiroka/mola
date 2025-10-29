@@ -1,0 +1,17 @@
+EXPECTED_NAME="Soiri Lab"
+EXPECTED_EMAIL="soiri@furrysoftwarefoundation.org"
+
+# Check if we're already in an amend to prevent infinite loop
+if [ "$HUSKY_SKIP_HOOKS" = "1" ]; then
+  exit 0
+fi
+
+# Get current UTC timestamp
+UTC_DATE=$(TZ=UTC date +"%Y-%m-%d %H:%M:%S +0000")
+
+# Amend with UTC timezone for both author and committer, preventing hook recursion
+HUSKY_SKIP_HOOKS=1 \
+GIT_COMMITTER_DATE="$UTC_DATE" \
+git commit --amend --no-edit --no-verify --date="$UTC_DATE" --author="$EXPECTED_NAME <$EXPECTED_EMAIL>"
+
+echo "✅ Commit amended to UTC: $UTC_DATE"

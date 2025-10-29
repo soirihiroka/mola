@@ -1,0 +1,51 @@
+name: Force UTC Timezone
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  enforce-utc-timezone:
+    name: Enforce UTC Timezone
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Check and fix commit timezone
+        run: |
+          # Get the timezone offset of the latest commit
+          COMMIT_TZ=$(git log -1 --format=%ai | awk '{print $3}')
+          COMMIT_HASH=$(git log -1 --format=%H)
+          
+          echo "Current commit: $COMMIT_HASH"
+          
+          # Check if timezone is +0000 (UTC)
+          if [ "$COMMIT_TZ" != "+0000" ]; then
+            echo "⚠️  Timezone is not UTC. Amending commit to UTC..."
+            
+            # Configure git
+            git config user.name "$(git log -1 --format=%an)"
+            git config user.email "$(git log -1 --format=%ae)"
+            
+            # Get the dates without timezone and convert to UTC
+            AUTHOR_DATE_UTC=$(git log -1 --format=%aI | sed 's/[+-][0-9]\{2\}:[0-9]\{2\}$/+00:00/')
+            COMMITTER_DATE_UTC=$(git log -1 --format=%cI | sed 's/[+-][0-9]\{2\}:[0-9]\{2\}$/+00:00/')
+            
+            # Amend the commit with UTC timezone
+            GIT_AUTHOR_DATE="$AUTHOR_DATE_UTC" GIT_COMMITTER_DATE="$COMMITTER_DATE_UTC" \
+              git commit --amend --no-edit --allow-empty > /dev/null 2>&1
+            
+            # Force push the amended commit
+            git push --force-with-lease origin main 2>&1 | grep -v "Date:"
+            
+            echo "✅ Commit amended to UTC and force-pushed"
+          else
+            echo "✅ Commit timezone is already UTC"
+          fi

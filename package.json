@@ -1,0 +1,10 @@
+{
+  "name": "mola",
+  "version": "1.0.0",
+  "description": "A WIP realtime 3D motion capture solution",
+  "license": "MIT",
+  "author": "",
+  "scripts": {
+    "prepare": "husky"
+  }
+}

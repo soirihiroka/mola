@@ -1,0 +1,49 @@
+[package]
+name = "mola-display"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bevy = { version = "0.16.0", features = [
+    "default",
+    "bevy_dev_tools",
+    "bevy_pbr",
+] }
+bevy_webserver = "0.2.0"
+axum = "0.8.1"
+serde = "1.0.219"
+serde_json = "1.0.140"
+bevy_defer = "0.14.0"
+tower-http = { version = "0.6.3", features = ["cors", "trace"] }
+bevy_egui = "0.34.1"
+autograd = "1.1.1"
+strum = "0.27.1"
+strum_macros = "0.27.1"
+thiserror = "2.0.12"
+bevy_simple_subsecond_system = { git = "https://github.com/TheBevyFlock/bevy_simple_subsecond_system", version = "0.2.0" }
+typed-builder = "0.21.0"
+paste = "1.0.15"
+downcast-rs = "2.0.1"
+serde_with = "3.14.0"
+bevy_svg = "0.15.1"
+# bevy-inspector-egui = "0.33.1"
+# bevy_svg = "0.15.1"
+
+# Enable a large amount of optimization in the dev profile for dependencies.
+[profile.dev.package."*"]
+opt-level = 3
+
+[profile.wasm-dev]
+inherits = "dev"
+opt-level = 1
+
+[profile.server-dev]
+inherits = "dev"
+
+[profile.android-dev]
+inherits = "dev"
+
+# for Linux
+[target.x86_64-unknown-linux-gnu]
+linker = "clang"
+rustflags = ["-C", "link-arg=-fuse-ld=lld"]

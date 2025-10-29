@@ -1,0 +1,15 @@
+{
+    "cSpell.words": [
+        "Egui",
+        "Gltf",
+        "Kalman",
+        "keypoints",
+        "Landmarker",
+        "lerp",
+        "mocap",
+        "subsecond",
+        "Toon",
+        "wgsl"
+    ],
+    "makefile.configureOnOpen": true,
+}
