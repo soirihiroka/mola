@@ -19,13 +19,3 @@ cargo binstall dioxus-cli@0.7.0-alpha.1
 # Install Dependencies
 cargo install --path .
 ```
-
-macos
-
-TODOs:
-
-- Offset shader
-- Facial capture
-    - Eyes
-    - Mouth
-- Video export
