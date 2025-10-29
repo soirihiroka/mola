@@ -69,7 +69,7 @@ If the web motion capture client isn't run on the same host as the display clien
   - `shaders/`, `assets/` — shaders, fonts, models and other assets
   - `Cargo.toml` — Rust crate manifest
 
-- `mocap/web/` — web frontend (Vite + React/TS)
+- `mocap/web/` — web frontend
   - `src/` — web app source
   - `package.json` — frontend scripts and dependencies
 
