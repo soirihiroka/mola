@@ -5,4 +5,4 @@ EXPECTED_EMAIL="soiri@furrysoftwarefoundation.org"
 git config user.name "$EXPECTED_NAME"
 git config user.email "$EXPECTED_EMAIL"
 
-echo "✅ Author: $EXPECTED_NAME <$EXPECTED_EMAIL>"
+echo "Author: $EXPECTED_NAME <$EXPECTED_EMAIL>"

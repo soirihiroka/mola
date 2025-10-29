@@ -14,4 +14,4 @@ HUSKY_SKIP_HOOKS=1 \
 GIT_COMMITTER_DATE="$UTC_DATE" \
 git commit --amend --no-edit --no-verify --date="$UTC_DATE" --author="$EXPECTED_NAME <$EXPECTED_EMAIL>"
 
-echo "✅ Commit amended to UTC: $UTC_DATE"
+echo "Commit amended to UTC: $UTC_DATE"
