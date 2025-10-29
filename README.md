@@ -1,4 +1,4 @@
-# Mola
+# Mola 🐠
 
 Mola (named after the Mola mola) is a work-in-progress realtime 3D motion-capture for vtubers.
 
